@@ -10,8 +10,6 @@ Faça os exercícios a seguir escrevendo código JavaScript a ser vinculado à s
 - Faça a verificação se o tipo de dado adequado foi inserido
 - Utilize a conversão de tipos, implícita ou explícita, conforme necessidade, em cada exercício
 - Os exercícios a seguir NÃO precisam necessariamente que dados sejam fornecidos pelo usuário
-- As funções podem ser testadas e invocadas por vocês mesmos no código a fim de testar os seus resultados
-- Você pode utilizar tanto DECLARAÇÃO DE FUNÇÃO quanto EXPRESSÃO DE FUNÇÃO
 
 ### Essenciais
 
