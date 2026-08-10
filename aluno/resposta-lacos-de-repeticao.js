@@ -1,4 +1,4 @@
-0// 1) Números de 1 a 100
+0 // 1) Números de 1 a 100
 function mostrar1a100While() {
    let i = 1;
    while (i <= 100) {
