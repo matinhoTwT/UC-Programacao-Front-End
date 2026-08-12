@@ -22,7 +22,7 @@ function inserirTextoAntesDoPrimeiroParagrafo(texto) {
     const artigos = document.querySelectorAll('article');
 
     artigos.forEach((artigo) => {
-        const primeiroParagrafo = artigo.querySelector('p:not(.meta)');
+        const primeiroParagrafo = artigo.querySelector('p:not(.meta)'); 
 
         if (primeiroParagrafo) {
             const marcador = document.createElement('span');
