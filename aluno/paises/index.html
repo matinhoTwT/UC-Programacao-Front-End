@@ -89,6 +89,8 @@
 		<button id="btn1" class="ativo" onclick="mostrarExercicio(1)">Exercício 1</button>
 		<button id="btn2" onclick="mostrarExercicio(2)">Exercício 2</button>
 		<button id="btn3" onclick="mostrarExercicio(3)">Exercício 3</button>
+		<button id="btn4" onclick="mostrarExercicio(4)">Exercício 4</button>
+		<button id="btn5" onclick="mostrarExercicio(5)">Exercício 5</button>
 	</nav>
 
 	<section id="exercicio1" class="exercicio ativo">
@@ -104,6 +106,18 @@
 	<section id="exercicio3" class="exercicio">
 		<h2>Exercício 3 - Lista de países com detalhes e bandeiras</h2>
 		<section class="countries" id="ex3"></section>
+	</section>
+
+	<section id="exercicio4" class="exercicio">
+		<h2>Exercício 4 - Filtro de continentes</h2>
+		<p>Continentes filtrados: <strong id="continentesTexto"></strong></p>
+		<section class="countries" id="ex4"></section>
+	</section>
+
+	<section id="exercicio5" class="exercicio">
+		<h2>Exercício 5 - Filtro de moeda</h2>
+		<p>Moeda filtrada: <strong>Dólar dos Estados Unidos</strong></p>
+		<section class="countries" id="ex5"></section>
 	</section>
 
 	<script>
@@ -192,9 +206,78 @@
 			});
 		}
 
+		const continentesFiltrados = ["América", "África"];
+
+		function criarElementoPaisDetalhado(pais) {
+			const codigoAlpha2 = pais.id["ISO-3166-1-ALPHA-2"];
+			const sigla = pais.id["ISO-3166-1-ALPHA-3"];
+			const nome = pais.nome.abreviado;
+			const regiao = pais.localizacao?.regiao?.nome ?? "Não informado";
+			const capital = pais.governo?.capital?.nome ?? "Não informado";
+
+			const artigo = document.createElement("article");
+
+			const bandeira = document.createElement("img");
+			bandeira.src = "https://flagcdn.com/w80/" + codigoAlpha2.toLowerCase() + ".png";
+			bandeira.alt = "Bandeira de " + nome;
+			bandeira.width = 80;
+
+			const titulo = document.createElement("h3");
+			titulo.textContent = nome;
+
+			const detalhes = document.createElement("dl");
+			detalhes.innerHTML =
+				"<dt>Sigla</dt><dd>" + sigla + "</dd>" +
+				"<dt>Região</dt><dd>" + regiao + "</dd>" +
+				"<dt>Capital</dt><dd>" + capital + "</dd>";
+
+			artigo.appendChild(bandeira);
+			artigo.appendChild(titulo);
+			artigo.appendChild(detalhes);
+
+			return artigo;
+		}
+
+		async function exibirExercicio4() {
+			const countries = await carregarArrayDeCountries("countries-api.js");
+			const container4 = document.getElementById("ex4");
+
+			document.getElementById("continentesTexto").textContent = continentesFiltrados.join(", ");
+
+			// Filtra só os países cuja região está na lista de continentes
+			const paisesFiltrados = countries.filter(function (pais) {
+				const regiao = pais.localizacao?.regiao?.nome;
+				return continentesFiltrados.includes(regiao);
+			});
+
+			paisesFiltrados.forEach(function (pais) {
+				container4.appendChild(criarElementoPaisDetalhado(pais));
+			});
+		}
+
+		async function exibirExercicio5() {
+			const countries = await carregarArrayDeCountries("countries-api.js");
+			const container5 = document.getElementById("ex5");
+
+			// Filtra os países que possuem a moeda "Dólar dos Estados Unidos"
+			const paisesFiltrados = countries.filter(function (pais) {
+				const moedas = pais["unidades-monetarias"] ?? [];
+				return moedas.some(function (moeda) {
+					return moeda.nome === "Dólar dos Estados Unidos";
+				});
+			});
+
+			paisesFiltrados.forEach(function (pais) {
+				container5.appendChild(criarElementoPaisDetalhado(pais));
+			});
+		}
+
+		// Executa os cinco exercícios ao carregar a página
 		exibirExercicio1();
 		exibirExercicio2();
 		exibirExercicio3();
+		exibirExercicio4();
+		exibirExercicio5();
 	</script>
 </body>
 </html>
