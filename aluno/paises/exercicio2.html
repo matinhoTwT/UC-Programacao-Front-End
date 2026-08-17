@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Exercício 2 - Lista de países com cor</title>
+	<style>
+		body { font-family: Arial, sans-serif; padding: 2rem; }
+		.countries { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+		.countries div {
+			border: 1px solid #ccc;
+			border-radius: 6px;
+			padding: 0.5rem 0.75rem;
+		}
+	</style>
+</head>
+<body>
+	<h1>Exercício 2 - Lista de países com cor</h1>
+
+	<section class="countries" id="ex2"></section>
+
+	<script src="countries-colors.js"></script>
+	<script>
+		const container2 = document.getElementById("ex2");
+
+		countries.forEach(function (pais) {
+			
+			const div = document.createElement("div");
+
+			div.style.backgroundColor = pais.cor;
+
+			const titulo = document.createElement("h3");
+			titulo.textContent = pais.nome;
+
+			div.appendChild(titulo);
+
+			container2.appendChild(div);
+		});
+	</script>
+</body>
+</html>

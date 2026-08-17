@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Exercício 3 - Lista de países com detalhes e bandeiras</title>
+	<style>
+		body { font-family: Arial, sans-serif; padding: 2rem; }
+		.countries { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+		.countries article {
+			border: 1px solid #ccc;
+			border-radius: 6px;
+			padding: 0.75rem 1rem;
+			width: 220px;
+		}
+		.countries img { display: block; margin-bottom: 0.4rem; }
+		.countries dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 0.2rem 0.5rem; }
+		.countries dt { font-weight: bold; }
+		.countries dd { margin: 0; }
+	</style>
+</head>
+<body>
+	<h1>Exercício 3 - Lista de países com detalhes e bandeiras</h1>
+
+	<section class="countries" id="ex3"></section>
+
+	<script src="countries-api.js"></script>
+	<script>
+		const container3 = document.getElementById("ex3");
+		
+		countries.forEach(function (pais) {
+			const codigoAlpha2 = pais.id["ISO-3166-1-ALPHA-2"];
+			const sigla = pais.id["ISO-3166-1-ALPHA-3"];
+			const nome = pais.nome.abreviado;
+			const regiao = pais.localizacao?.regiao?.nome ?? "Não informado";
+			const capital = pais.governo?.capital?.nome ?? "Não informado";
+
+			
+			const artigo = document.createElement("article");
+
+			
+			const bandeira = document.createElement("img");
+			bandeira.src = "https://flagcdn.com/w80/" + codigoAlpha2.toLowerCase() + ".png";
+			bandeira.alt = "Bandeira de " + nome;
+			bandeira.width = 80;
+
+			const titulo = document.createElement("h3");
+			titulo.textContent = nome;
+
+			const detalhes = document.createElement("dl");
+			detalhes.innerHTML =
+				"<dt>Sigla</dt><dd>" + sigla + "</dd>" +
+				"<dt>Região</dt><dd>" + regiao + "</dd>" +
+				"<dt>Capital</dt><dd>" + capital + "</dd>";
+
+			artigo.appendChild(bandeira);
+			artigo.appendChild(titulo);
+			artigo.appendChild(detalhes);
+
+			container3.appendChild(artigo);
+		});
+	</script>
+</body>
+</html>
