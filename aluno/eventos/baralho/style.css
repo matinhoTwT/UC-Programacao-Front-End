@@ -1,0 +1,33 @@
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+	padding: 30px;
+	font-family: sans-serif;
+	background-color: #1b4332;
+}
+
+#baralho {
+	width: 150px;
+	cursor: pointer;
+	transition: transform 0.15s ease;
+}
+
+#baralho:hover {
+	transform: scale(1.05);
+}
+
+#cartas-compradas {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	justify-content: center;
+	max-width: 900px;
+}
+
+.carta {
+	width: 90px;
+	border-radius: 6px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}

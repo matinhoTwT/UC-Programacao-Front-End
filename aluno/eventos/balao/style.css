@@ -1,0 +1,14 @@
+    body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+	background-color: #f0f2f5;
+}
+
+#balao {
+	margin: 0;
+	transition: font-size 0.1s ease-out;
+	user-select: none;
+}
